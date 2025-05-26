@@ -1,11 +1,55 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sweet & Savory Corner</title>
     <style>
+        /* CSS Değişkenleri (Aydınlık ve Karanlık Mod için) */
+        :root {
+            --bg-color: #FFF0F5; /* Lavender Blush */
+            --text-color: #5D5D5D;
+            --header-color: #FF69B4; /* Deep Pink */
+            --card-bg-color: #FFFFFF;
+            --card-shadow-color: rgba(0,0,0,0.08);
+            --border-color: #D8BFD8; /* Thistle */
+            --button-bg-color: #FFC0CB; /* Pink */
+            --button-text-color: white;
+            --button-hover-bg-color: #FFB6C1; /* Light Pink */
+            --input-bg-color: #FFFFFF;
+            --input-border-color: #D8BFD8;
+            --input-focus-border-color: #FFB6C1;
+            --link-color: #FF69B4;
+            --link-hover-color: #FF1493;
+            --icon-color: #FF69B4;
+            --modal-bg-color: #FFFAFA; /* Snow */
+            --hr-color: #D8BFD8;
+            --placeholder-img-bg: #FFE4E1;
+            --placeholder-img-text: #FF69B4;
+        }
+
+        body.dark-mode {
+            --bg-color: #2C3E50; /* Koyu Mavi-Gri */
+            --text-color: #ECF0F1; /* Açık Gri */
+            --header-color: #E980FC; /* Açık Mor */
+            --card-bg-color: #34495E; /* Daha Koyu Mavi-Gri */
+            --card-shadow-color: rgba(0,0,0,0.2);
+            --border-color: #566573; /* Orta Gri */
+            --button-bg-color: #9B59B6; /* Mor */
+            --button-text-color: white;
+            --button-hover-bg-color: #8E44AD; /* Daha Koyu Mor */
+            --input-bg-color: #566573;
+            --input-border-color: #708090; /* Slate Gray */
+            --input-focus-border-color: #E980FC;
+            --link-color: #E980FC;
+            --link-hover-color: #D252F8;
+            --icon-color: #E980FC;
+            --modal-bg-color: #34495E;
+            --hr-color: #566573;
+            --placeholder-img-bg: #566573;
+            --placeholder-img-text: #E980FC;
+        }
+
         /* Global Resets and Base Styles */
         * {
             margin: 0;
@@ -17,16 +61,17 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #FFF0F5; /* Lavender Blush - main background */
-            color: #5D5D5D; /* Dark Gray - primary text color */
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
             font-size: 16px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Georgia', 'Times New Roman', Times, serif; /* Elegant font for headings */
-            color: #FF69B4; /* Deep Pink - heading color */
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            color: var(--header-color);
             margin-bottom: 0.75em;
             line-height: 1.2;
         }
@@ -36,13 +81,13 @@
         }
 
         a {
-            color: #FF69B4; /* Deep Pink */
+            color: var(--link-color);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         a:hover {
-            color: #FF1493; /* Darker Pink */
+            color: var(--link-hover-color);
         }
 
         img, video {
@@ -52,11 +97,11 @@
         }
 
         button, input[type="submit"] {
-            background-color: #FFC0CB; /* Pink */
-            color: white;
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
             border: none;
             padding: 12px 20px;
-            border-radius: 25px; /* Rounded buttons */
+            border-radius: 25px;
             cursor: pointer;
             font-size: 1em;
             font-weight: bold;
@@ -65,7 +110,7 @@
         }
 
         button:hover, input[type="submit"]:hover {
-            background-color: #FFB6C1; /* Light Pink */
+            background-color: var(--button-hover-bg-color);
             transform: translateY(-2px);
         }
         
@@ -75,512 +120,157 @@
 
         input[type="text"],
         input[type="email"],
+        input[type="password"], /* Added password type */
         input[type="url"],
         textarea,
         select {
             width: 100%;
             padding: 10px 15px;
             margin-bottom: 15px;
-            border: 1px solid #D8BFD8; /* Thistle */
+            border: 1px solid var(--input-border-color);
             border-radius: 8px;
             font-size: 0.95em;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
+        input[type="password"]:focus,
         input[type="url"]:focus,
         textarea:focus,
         select:focus {
-            border-color: #FFB6C1; /* Light Pink */
-            box-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+            border-color: var(--input-focus-border-color);
+            box-shadow: 0 0 5px color-mix(in srgb, var(--input-focus-border-color) 50%, transparent);
             outline: none;
         }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
+        
+        textarea { min-height: 100px; resize: vertical; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 20px 0; }
 
         /* Navigation Header */
         .navbar {
-            background-color: #FFFFFF;
+            background-color: var(--card-bg-color);
             padding: 15px 0;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: top 0.3s ease;
+            box-shadow: 0 2px 10px var(--card-shadow-color);
+            transition: top 0.3s ease, background-color 0.3s ease;
         }
-
-        .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .site-logo {
-            font-size: 1.8em;
-            font-weight: bold;
-            font-family: 'Georgia', 'Times New Roman', Times, serif;
-            color: #FF69B4;
-        }
+        .navbar-container { display: flex; justify-content: space-between; align-items: center; width: 90%; max-width: 1200px; margin: 0 auto; }
+        .site-logo { font-size: 1.8em; font-weight: bold; font-family: 'Georgia', 'Times New Roman', Times, serif; color: var(--header-color); }
         .site-logo a { color: inherit; text-decoration: none; }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            font-size: 1em;
-            padding: 5px 0;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #FF69B4;
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .profile-icon, .menu-toggle {
-            font-size: 1.5em;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #FF69B4;
-            padding: 5px;
-        }
+        .nav-links { list-style: none; display: flex; align-items: center;}
+        .nav-links li { margin-left: 20px; }
+        .nav-links a { font-weight: 500; font-size: 1em; padding: 5px 0; position: relative; color: var(--link-color); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background-color: var(--link-color); transition: width 0.3s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; align-items: center; }
+        .auth-user-display { margin-right: 15px; font-size: 0.9em; color: var(--text-color); }
+        .profile-icon, .menu-toggle, #theme-toggle-btn { font-size: 1.5em; cursor: pointer; background: none; border: none; color: var(--icon-color); padding: 5px; }
         .menu-toggle { display: none; }
 
-
         /* Main Content Area */
-        main {
-            padding-top: 100px; /* Adjust based on navbar height */
-            min-height: calc(100vh - 150px); /* Footer height approx 50px + padding */
-        }
+        main { padding-top: 100px; min-height: calc(100vh - 150px); }
 
         /* Recipe Gallery */
-        #recipe-gallery-section {
-            padding: 20px 0;
-        }
-        
-        .gallery-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .search-bar input[type="text"] {
-            padding: 10px 15px;
-            width: 250px;
-            max-width: 100%;
-            border-radius: 20px;
-            margin-bottom: 0;
-        }
-        
-        .filter-sort select {
-            padding: 10px 15px;
-            border-radius: 20px;
-            margin-bottom: 0;
-            background-color: white;
-        }
-
-        .recipe-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .recipe-card {
-            background-color: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .recipe-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .recipe-card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .recipe-card-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .recipe-card-content h3 {
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        .recipe-card-content p {
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            flex-grow: 1;
-            color: #777;
-        }
-        
-        .recipe-card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85em;
-            color: #888;
-            margin-bottom: 15px;
-        }
-
-        .recipe-card-meta .likes {
-            cursor: pointer;
-        }
-        .recipe-card-meta .likes.liked svg path {
-            fill: #FF69B4;
-            stroke: #FF69B4;
-        }
-        .recipe-card-meta .likes svg {
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-            margin-right: 5px;
-            transition: fill 0.3s ease, stroke 0.3s ease;
-        }
-         .recipe-card-meta .likes svg path {
-            fill: none;
-            stroke: #FF69B4;
-            stroke-width: 1.5px;
-        }
-
+        #recipe-gallery-section { padding: 20px 0; }
+        .gallery-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+        .search-bar input[type="text"] { padding: 10px 15px; width: 250px; max-width: 100%; border-radius: 20px; margin-bottom: 0; }
+        .filter-sort select { padding: 10px 15px; border-radius: 20px; margin-bottom: 0; background-color: var(--input-bg-color); color: var(--text-color); border: 1px solid var(--input-border-color); }
+        .recipe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .recipe-card { background-color: var(--card-bg-color); border-radius: 12px; box-shadow: 0 4px 15px var(--card-shadow-color); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; }
+        .recipe-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px color-mix(in srgb, var(--card-shadow-color) 150%, transparent); }
+        .recipe-card-image { width: 100%; height: 200px; object-fit: cover; background-color: var(--placeholder-img-bg); }
+        .recipe-card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .recipe-card-content h3 { font-size: 1.4em; margin-bottom: 10px; color: var(--header-color);}
+        .recipe-card-content p { font-size: 0.9em; margin-bottom: 15px; flex-grow: 1; color: var(--text-color); }
+        .recipe-card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.85em; color: color-mix(in srgb, var(--text-color) 80%, transparent); margin-bottom: 15px; }
+        .recipe-card-meta .likes { cursor: pointer; }
+        .recipe-card-meta .likes.liked svg path { fill: var(--link-color); stroke: var(--link-color); }
+        .recipe-card-meta .likes svg { width: 18px; height: 18px; vertical-align: middle; margin-right: 5px; transition: fill 0.3s ease, stroke 0.3s ease; }
+        .recipe-card-meta .likes svg path { fill: none; stroke: var(--link-color); stroke-width: 1.5px; }
 
         /* Modals */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5); /* Dim background */
-            animation: fadeIn 0.3s ease-out;
-        }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); animation: fadeIn 0.3s ease-out; }
+        .modal-content { background-color: var(--modal-bg-color); margin: 5% auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.2); animation: slideIn 0.4s ease-out; transition: background-color 0.3s ease; }
+        .modal-content.modal-lg { max-width: 800px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-btn { color: var(--text-color); float: right; font-size: 28px; font-weight: bold; position: absolute; top: 15px; right: 25px; transition: color 0.3s ease; }
+        .close-btn:hover, .close-btn:focus { color: var(--header-color); text-decoration: none; cursor: pointer; }
+        .modal-header h2 { margin-top: 0; margin-bottom: 20px; color: var(--header-color); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--header-color); }
+        #image-preview { max-width: 200px; max-height: 200px; margin-top: 10px; border: 1px solid var(--border-color); border-radius: 8px; display: none; }
+        .auth-form-toggle { text-align: center; margin-top: 15px; }
+        .auth-form-toggle a { cursor: pointer; font-weight: bold;}
+        .error-message { color: #E74C3C; font-size: 0.9em; margin-bottom: 10px; }
 
-        .modal-content {
-            background-color: #FFFAFA; /* Snow - slightly off-white */
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px; /* Default max-width */
-            position: relative;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            animation: slideIn 0.4s ease-out;
-        }
-        .modal-content.modal-lg {
-            max-width: 800px;
-        }
-
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #FF69B4;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-header h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-        
-        /* Add Recipe Form & Edit Form*/
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #FF69B4;
-        }
-        #image-preview {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
-            border: 1px solid #D8BFD8;
-            border-radius: 8px;
-            display: none; /* Hidden until image selected */
-        }
-        
         /* Recipe Detail View */
-        #recipe-detail-modal .modal-content {
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .recipe-detail-media {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .recipe-detail-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .recipe-detail-actions .like-btn.liked {
-             background-color: #FFB6C1;
-        }
-        .recipe-detail-actions .like-btn.liked svg path{
-            fill: white;
-        }
-        .recipe-detail-actions .like-btn svg {
-            width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;
-        }
-        .recipe-detail-actions .like-btn svg path {
-            fill: white;
-        }
+        #recipe-detail-modal .modal-content { max-height: 85vh; overflow-y: auto; }
+        .recipe-detail-media { width: 100%; max-height: 400px; object-fit: cover; margin-bottom: 20px; background-color: var(--placeholder-img-bg); }
+        .recipe-detail-actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .recipe-detail-actions .like-btn.liked { background-color: var(--button-hover-bg-color); }
+        .recipe-detail-actions .like-btn.liked svg path{ fill: var(--button-text-color); }
+        .recipe-detail-actions .like-btn svg { width: 16px; height: 16px; margin-right: 8px; vertical-align: middle; }
+        .recipe-detail-actions .like-btn svg path { fill: var(--button-text-color); }
 
         /* Comment Section */
-        .comments-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #D8BFD8;
-        }
-        .comment {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .comment-author {
-            font-weight: bold;
-            color: #FF69B4;
-        }
-        .comment-date {
-            font-size: 0.8em;
-            color: #999;
-        }
-        .comment-body {
-            margin-bottom: 10px;
-        }
-        .comment-actions button {
-            background: none;
-            border: none;
-            color: #FF69B4;
-            font-size: 0.85em;
-            padding: 2px 5px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-        .comment-actions button:hover {
-            text-decoration: underline;
-        }
-        .replies {
-            margin-left: 30px;
-            padding-left: 15px;
-            border-left: 2px solid #FFD1DC; /* Pale Pink */
-        }
-        .reply-form, .edit-comment-form {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        .reply-form textarea, .edit-comment-form textarea {
-            min-height: 60px;
-            margin-bottom: 8px;
-        }
+        .comments-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--hr-color); }
+        .comment { background-color: var(--card-bg-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px var(--card-shadow-color); transition: background-color 0.3s ease; }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .comment-author { font-weight: bold; color: var(--header-color); }
+        .comment-date { font-size: 0.8em; color: color-mix(in srgb, var(--text-color) 70%, transparent); }
+        .comment-body { margin-bottom: 10px; }
+        .comment-actions button { background: none; border: none; color: var(--link-color); font-size: 0.85em; padding: 2px 5px; cursor: pointer; margin-right: 10px; }
+        .comment-actions button:hover { text-decoration: underline; }
+        .replies { margin-left: 30px; padding-left: 15px; border-left: 2px solid var(--border-color); }
+        .reply-form, .edit-comment-form { margin-top: 10px; margin-bottom: 10px; }
+        .reply-form textarea, .edit-comment-form textarea { min-height: 60px; margin-bottom: 8px; }
 
         /* Footer */
-        .footer {
-            background-color: #FFFAFA; /* Snow */
-            color: #888;
-            text-align: center;
-            padding: 25px 0;
-            border-top: 1px solid #D8BFD8; /* Thistle */
-            margin-top: 40px;
-        }
+        .footer { background-color: var(--card-bg-color); color: color-mix(in srgb, var(--text-color) 80%, transparent); text-align: center; padding: 25px 0; border-top: 1px solid var(--hr-color); margin-top: 40px; transition: background-color 0.3s ease, color 0.3s ease; }
         .footer p { margin-bottom: 10px; }
-        .social-media-placeholders a {
-            margin: 0 10px;
-            font-size: 1.5em;
-            color: #FFC0CB; /* Pink */
-        }
-        .social-media-placeholders a:hover {
-            color: #FFB6C1; /* Light Pink */
-        }
-        .newsletter-form input[type="email"]{
-            width: 250px;
-            padding: 10px;
-            border-radius: 20px;
-            border: 1px solid #D8BFD8;
-            margin-right: 5px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-         .newsletter-form button {
-            padding: 10px 15px;
-            vertical-align: middle;
-        }
+        .social-media-placeholders a { margin: 0 10px; font-size: 1.5em; color: var(--button-bg-color); }
+        .social-media-placeholders a:hover { color: var(--button-hover-bg-color); }
+        .newsletter-form input[type="email"]{ width: 250px; padding: 10px; border-radius: 20px; border: 1px solid var(--input-border-color); margin-right: 5px; display: inline-block; vertical-align: middle; }
+        .newsletter-form button { padding: 10px 15px; vertical-align: middle; }
 
         /* Scroll-to-top Button */
-        #scroll-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #FFC0CB; /* Pink */
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            cursor: pointer;
-            display: none; /* Hidden by default */
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-        }
-        #scroll-to-top:hover {
-            background-color: #FFB6C1; /* Light Pink */
-        }
+        #scroll-to-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--button-bg-color); color: var(--button-text-color); border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; justify-content: center; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; }
+        #scroll-to-top:hover { background-color: var(--button-hover-bg-color); }
         
         /* Utility Classes */
         .hidden { display: none !important; }
         .text-center { text-align: center; }
-        .mt-1 { margin-top: 1rem; }
-        .mb-1 { margin-bottom: 1rem; }
+        .mt-1 { margin-top: 1rem; } .mb-1 { margin-bottom: 1rem; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar-container {
-                width: 95%;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* Below navbar */
-                left: 0;
-                width: 100%;
-                background-color: #FFFFFF;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                padding: 10px 0;
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links li {
-                margin: 10px 20px;
-                text-align: center;
-            }
-            .menu-toggle {
-                display: block;
-            }
+            .navbar-container { width: 95%; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background-color: var(--card-bg-color); box-shadow: 0 2px 5px var(--card-shadow-color); padding: 10px 0; }
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 10px 20px; text-align: center; }
+            .menu-toggle { display: block; }
             .site-logo { font-size: 1.5em; }
-
-            .gallery-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .search-bar input[type="text"], .filter-sort select {
-                width: 100%;
-            }
-
-            .modal-content {
-                margin: 10% auto;
-                width: 95%;
-                padding: 20px;
-            }
-             .modal-content.modal-lg {
-                max-width: 95%;
-            }
-
-            .recipe-grid {
-                grid-template-columns: 1fr; /* Single column on small screens */
-            }
+            .gallery-controls { flex-direction: column; align-items: stretch; }
+            .search-bar input[type="text"], .filter-sort select { width: 100%; }
+            .modal-content { margin: 10% auto; width: 95%; padding: 20px; }
+            .modal-content.modal-lg { max-width: 95%; }
+            .recipe-grid { grid-template-columns: 1fr; }
             .newsletter-form input[type="email"] { width: calc(100% - 100px); margin-bottom: 10px;}
-            .newsletter-form button { width: auto;}
         }
-        
         @media (max-width: 480px) {
-            body { font-size: 15px; }
-            h1 { font-size: 2em; }
-            h2 { font-size: 1.6em; }
-            h3 { font-size: 1.3em; }
+            body { font-size: 15px; } h1 { font-size: 2em; } h2 { font-size: 1.6em; } h3 { font-size: 1.3em; }
             .recipe-card-content h3 { font-size: 1.2em; }
             button, input[type="submit"] { padding: 10px 15px; font-size: 0.95em;}
             .footer { padding: 20px 10px; }
         }
-
     </style>
 </head>
 <body>
@@ -588,14 +278,17 @@
     <header class="navbar">
         <div class="navbar-container">
             <div class="site-logo"><a href="#" id="home-link">Sweet & Savory</a></div>
-            <button class="menu-toggle" id="menu-toggle-btn" aria-label="Toggle navigation menu">&#9776;</button>
-            <nav>
+            <div class="nav-actions">
+                 <span id="auth-user-display" class="auth-user-display hidden"></span>
                 <ul class="nav-links" id="nav-links-list">
-                    <li><a href="#" id="nav-home">Home</a></li>
-                    <li><a href="#" id="nav-add-recipe">Add Recipe</a></li>
-                    </ul>
-            </nav>
-             <button class="profile-icon" id="profile-btn" aria-label="User Profile">&#128100;</button>
+                    <li><a href="#" id="nav-home">Anasayfa</a></li>
+                    <li id="nav-add-recipe-item" class="hidden"><a href="#" id="nav-add-recipe">Tarif Ekle</a></li>
+                    <li id="nav-login-item"><a href="#" id="nav-login">Giriş Yap</a></li>
+                    <li id="nav-register-item"><a href="#" id="nav-register">Kayıt Ol</a></li>
+                    <li id="nav-logout-item" class="hidden"><a href="#" id="nav-logout">Çıkış Yap</a></li>
+                </ul>
+                <button id="theme-toggle-btn" aria-label="Toggle dark mode">🌙</button> <button class="menu-toggle" id="menu-toggle-btn" aria-label="Toggle navigation menu">&#9776;</button>
+            </div>
         </div>
     </header>
 
@@ -604,17 +297,17 @@
             <section id="recipe-gallery-section">
                 <div class="gallery-controls">
                     <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="Search recipes by title or tag...">
+                        <input type="text" id="search-input" placeholder="Başlık veya etiketle tarif ara...">
                     </div>
                     <div class="filter-sort">
                         <select id="sort-filter">
-                            <option value="newest">Sort by Newest</option>
-                            <option value="most-liked">Sort by Most Liked</option>
+                            <option value="newest">En Yeniye Göre Sırala</option>
+                            <option value="most-liked">En Çok Beğenilene Göre Sırala</option>
                         </select>
                     </div>
                 </div>
                 <div id="recipe-grid" class="recipe-grid">
-                    <p id="no-recipes-message" class="hidden">No recipes found. Try adding one!</p>
+                    <p id="no-recipes-message" class="hidden">Tarif bulunamadı. Bir tane eklemeyi deneyin!</p>
                 </div>
             </section>
         </div>
@@ -623,38 +316,22 @@
     <div id="add-edit-recipe-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="close-add-edit-modal">&times;</span>
-            <div class="modal-header">
-                <h2 id="add-edit-modal-title">Add New Recipe</h2>
-            </div>
+            <div class="modal-header"><h2 id="add-edit-modal-title">Yeni Tarif Ekle</h2></div>
             <form id="add-edit-recipe-form">
-                <input type="hidden" id="recipe-id-input"> <div class="form-group">
-                    <label for="recipe-title">Recipe Title</label>
-                    <input type="text" id="recipe-title" required>
-                </div>
+                <input type="hidden" id="recipe-id-input">
+                <div class="form-group"><label for="recipe-title">Tarif Başlığı</label><input type="text" id="recipe-title" required></div>
+                <div class="form-group"><label for="recipe-short-description">Kısa Açıklama</label><textarea id="recipe-short-description" rows="3" required></textarea></div>
                 <div class="form-group">
-                    <label for="recipe-short-description">Short Description</label>
-                    <textarea id="recipe-short-description" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="recipe-image">Image (URL or Upload)</label>
-                    <input type="url" id="recipe-image-url" placeholder="Enter image URL (e.g., https://example.com/image.jpg)">
-                    <p style="text-align: center; margin: 5px 0; font-size: 0.9em;">OR</p>
+                    <label for="recipe-image">Görsel (URL veya Yükle)</label>
+                    <input type="url" id="recipe-image-url" placeholder="Görsel URL'si girin (örn: https://example.com/image.jpg)">
+                    <p style="text-align: center; margin: 5px 0; font-size: 0.9em;">VEYA</p>
                     <input type="file" id="recipe-image-upload" accept="image/*">
-                    <img id="image-preview" src="#" alt="Image Preview">
+                    <img id="image-preview" src="#" alt="Görsel Önizleme">
                 </div>
-                <div class="form-group">
-                    <label for="recipe-ingredients">Ingredients (one per line)</label>
-                    <textarea id="recipe-ingredients" rows="5" required placeholder="e.g.,&#10;1 cup flour&#10;2 eggs&#10;100g chocolate"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="recipe-instructions">Step-by-step Instructions</label>
-                    <textarea id="recipe-instructions" rows="7" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="recipe-tags">Tags (comma-separated)</label>
-                    <input type="text" id="recipe-tags" placeholder="e.g., dessert, vegan, quick">
-                </div>
-                <button type="submit" id="submit-recipe-btn">Save Recipe</button>
+                <div class="form-group"><label for="recipe-ingredients">Malzemeler (her biri yeni satırda)</label><textarea id="recipe-ingredients" rows="5" required placeholder="örn:&#10;1 su bardağı un&#10;2 yumurta&#10;100gr çikolata"></textarea></div>
+                <div class="form-group"><label for="recipe-instructions">Adım Adım Talimatlar</label><textarea id="recipe-instructions" rows="7" required></textarea></div>
+                <div class="form-group"><label for="recipe-tags">Etiketler (virgülle ayrılmış)</label><input type="text" id="recipe-tags" placeholder="örn: tatlı, vegan, hızlı"></div>
+                <button type="submit" id="submit-recipe-btn">Tarifi Kaydet</button>
             </form>
         </div>
     </div>
@@ -662,52 +339,62 @@
     <div id="recipe-detail-modal" class="modal">
         <div class="modal-content modal-lg">
             <span class="close-btn" id="close-recipe-detail-modal">&times;</span>
-            <div id="recipe-detail-content">
-                </div>
-             <div class="comments-section">
-                <h3>Comments</h3>
-                <div id="comments-list">
-                    </div>
-                <form id="add-comment-form" class="mt-1">
-                    <h4>Leave a Comment</h4>
+            <div id="recipe-detail-content"></div>
+            <div class="comments-section">
+                <h3>Yorumlar</h3>
+                <div id="comments-list"></div>
+                <form id="add-comment-form" class="mt-1 hidden">
+                    <h4>Yorum Yap</h4>
                     <input type="hidden" id="comment-recipe-id">
-                    <textarea id="comment-text" placeholder="Write your comment..." rows="3" required></textarea>
-                    <button type="submit">Post Comment</button>
+                    <textarea id="comment-text" placeholder="Yorumunuzu yazın..." rows="3" required></textarea>
+                    <button type="submit">Yorumu Gönder</button>
                 </form>
             </div>
         </div>
     </div>
-    
-    <div id="user-profile-modal" class="modal">
+
+    <div id="login-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="close-profile-modal">&times;</span>
-            <div class="modal-header">
-                <h2>User Profile</h2>
-            </div>
-            <form id="user-profile-form">
-                <div class="form-group">
-                    <label for="display-name">Display Name</label>
-                    <input type="text" id="display-name" placeholder="Enter your name for comments" required>
-                </div>
-                <button type="submit">Save Profile</button>
+            <span class="close-btn" data-modal-id="login-modal">&times;</span>
+            <div class="modal-header"><h2>Giriş Yap</h2></div>
+            <form id="login-form">
+                <div id="login-error" class="error-message hidden"></div>
+                <div class="form-group"><label for="login-email">E-posta</label><input type="email" id="login-email" required></div>
+                <div class="form-group"><label for="login-password">Şifre</label><input type="password" id="login-password" required></div>
+                <button type="submit">Giriş Yap</button>
             </form>
-            <p id="profile-message" class="mt-1"></p>
+            <div class="auth-form-toggle">Hesabın yok mu? <a id="show-register-link">Kayıt Ol</a></div>
         </div>
     </div>
 
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" data-modal-id="register-modal">&times;</span>
+            <div class="modal-header"><h2>Kayıt Ol</h2></div>
+            <form id="register-form">
+                <div id="register-error" class="error-message hidden"></div>
+                <div class="form-group"><label for="register-email">E-posta</label><input type="email" id="register-email" required></div>
+                <div class="form-group"><label for="register-password">Şifre (en az 6 karakter)</label><input type="password" id="register-password" required></div>
+                <button type="submit">Kayıt Ol</button>
+            </form>
+            <div class="auth-form-toggle">Zaten hesabın var mı? <a id="show-login-link">Giriş Yap</a></div>
+        </div>
+    </div>
+    
     <footer class="footer">
         <div class="container">
             <div class="social-media-placeholders">
-                <a href="#" aria-label="Facebook">F</a> <a href="#" aria-label="Instagram">I</a> <a href="#" aria-label="Pinterest">P</a> </div>
-            <div class="newsletter-form mt-1">
-                <input type="email" id="newsletter-email" placeholder="Your email for newsletter">
-                <button id="newsletter-submit-btn">Subscribe</button>
+                <a href="#" aria-label="Facebook">F</a> <a href="#" aria-label="Instagram">I</a> <a href="#" aria-label="Pinterest">P</a>
             </div>
-            <p class="mt-1">&copy; <span id="current-year"></span> Sweet & Savory Corner. All Rights Reserved.</p>
+            <div class="newsletter-form mt-1">
+                <input type="email" id="newsletter-email" placeholder="Bülten için e-postanız">
+                <button id="newsletter-submit-btn">Abone Ol</button>
+            </div>
+            <p class="mt-1">&copy; <span id="current-year"></span> Sweet & Savory Corner. Tüm Hakları Saklıdır.</p>
         </div>
     </footer>
 
-    <button id="scroll-to-top" title="Go to top">&#8679;</button>
+    <button id="scroll-to-top" title="Yukarı çık">&#8679;</button>
 
     <svg width="0" height="0" style="position:absolute;">
       <symbol id="icon-heart" viewBox="0 0 24 24">
@@ -715,657 +402,639 @@
       </symbol>
     </svg>
 
+    <script type="module">
+        // Firebase SDK'larından ihtiyaç duyulan fonksiyonları içe aktar
+        // KENDİ FIREBASE YAPILANDIRMANIZI KULLANIN!
+        // Bu sürüm numaralarını projenizin gereksinimlerine göre güncelleyebilirsiniz.
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            onAuthStateChanged, 
+            signOut as firebaseSignOut, // signOut ile çakışmaması için yeniden adlandırıldı
+            updateProfile 
+        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- DOM Elements ---
-        const recipeGrid = document.getElementById('recipe-grid');
-        const noRecipesMessage = document.getElementById('no-recipes-message');
-        const searchInput = document.getElementById('search-input');
-        const sortFilter = document.getElementById('sort-filter');
+        // Firebase yapılandırmanız (KENDİ PROJENİZİN BİLGİLERİYLE DEĞİŞTİRİN)
+        const firebaseConfig = {
+          apiKey: "AIzaSyCOvdvFHbwji_yhzPjAlGTtjlIJNLC2y_Q", // BURAYI DEĞİŞTİRİN
+          authDomain: "hrteam-afad9.firebaseapp.com", // BURAYI DEĞİŞTİRİN
+          databaseURL: "https://hrteam-afad9-default-rtdb.firebaseio.com", // Opsiyonel, Firestore/RTDB kullanmıyorsanız
+          projectId: "hrteam-afad9", // BURAYI DEĞİŞTİRİN
+          storageBucket: "hrteam-afad9.firebasestorage.app", // Opsiyonel, Storage kullanmıyorsanız
+          messagingSenderId: "1066969486587", // Opsiyonel, Messaging kullanmıyorsanız
+          appId: "1:1066969486587:web:f557ca9c162ac7ae620c5e", // BURAYI DEĞİŞTİRİN
+          measurementId: "G-THQZTV493J" // Opsiyonel, Analytics kullanmıyorsanız
+        };
 
-        // Nav
-        const navHomeLink = document.getElementById('nav-home');
-        const navAddRecipeLink = document.getElementById('nav-add-recipe');
-        const menuToggleBtn = document.getElementById('menu-toggle-btn');
-        const navLinksList = document.getElementById('nav-links-list');
-        const homeLinkLogo = document.getElementById('home-link');
+        // Firebase'i başlat
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        let currentUser = null; // Mevcut kullanıcıyı saklamak için
 
+        // DOMContentLoaded sonrası çalışacak ana script
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const recipeGrid = document.getElementById('recipe-grid');
+            const noRecipesMessage = document.getElementById('no-recipes-message');
+            const searchInput = document.getElementById('search-input');
+            const sortFilter = document.getElementById('sort-filter');
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
 
-        // Add/Edit Recipe Modal
-        const addEditRecipeModal = document.getElementById('add-edit-recipe-modal');
-        const closeAddEditModalBtn = document.getElementById('close-add-edit-modal');
-        const addEditRecipeForm = document.getElementById('add-edit-recipe-form');
-        const addEditModalTitle = document.getElementById('add-edit-modal-title');
-        const recipeIdInput = document.getElementById('recipe-id-input');
-        const recipeTitleInput = document.getElementById('recipe-title');
-        const recipeShortDescriptionInput = document.getElementById('recipe-short-description');
-        const recipeImageURLInput = document.getElementById('recipe-image-url');
-        const recipeImageUploadInput = document.getElementById('recipe-image-upload');
-        const imagePreview = document.getElementById('image-preview');
-        const recipeIngredientsInput = document.getElementById('recipe-ingredients');
-        const recipeInstructionsInput = document.getElementById('recipe-instructions');
-        const recipeTagsInput = document.getElementById('recipe-tags');
-        const submitRecipeBtn = document.getElementById('submit-recipe-btn');
+            // Nav
+            const navHomeLink = document.getElementById('nav-home');
+            const navAddRecipeLink = document.getElementById('nav-add-recipe');
+            const navAddRecipeItem = document.getElementById('nav-add-recipe-item');
+            const navLoginItem = document.getElementById('nav-login-item');
+            const navRegisterItem = document.getElementById('nav-register-item');
+            const navLogoutItem = document.getElementById('nav-logout-item');
+            const navLoginBtn = document.getElementById('nav-login');
+            const navRegisterBtn = document.getElementById('nav-register');
+            const navLogoutBtn = document.getElementById('nav-logout');
+            const authUserDisplay = document.getElementById('auth-user-display');
 
-        // Recipe Detail Modal
-        const recipeDetailModal = document.getElementById('recipe-detail-modal');
-        const closeRecipeDetailModalBtn = document.getElementById('close-recipe-detail-modal');
-        const recipeDetailContent = document.getElementById('recipe-detail-content');
-        
-        // Comments
-        const commentsList = document.getElementById('comments-list');
-        const addCommentForm = document.getElementById('add-comment-form');
-        const commentRecipeIdInput = document.getElementById('comment-recipe-id');
-        const commentTextInput = document.getElementById('comment-text');
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const navLinksList = document.getElementById('nav-links-list'); // Mobil menü listesi
+            const homeLinkLogo = document.getElementById('home-link');
 
-        // User Profile Modal
-        const profileBtn = document.getElementById('profile-btn');
-        const userProfileModal = document.getElementById('user-profile-modal');
-        const closeProfileModalBtn = document.getElementById('close-profile-modal');
-        const userProfileForm = document.getElementById('user-profile-form');
-        const displayNameInput = document.getElementById('display-name');
-        const profileMessage = document.getElementById('profile-message');
+            // Add/Edit Recipe Modal
+            const addEditRecipeModal = document.getElementById('add-edit-recipe-modal');
+            const closeAddEditModalBtn = document.getElementById('close-add-edit-modal');
+            const addEditRecipeForm = document.getElementById('add-edit-recipe-form');
+            const addEditModalTitle = document.getElementById('add-edit-modal-title');
+            const recipeIdInput = document.getElementById('recipe-id-input');
+            const recipeTitleInput = document.getElementById('recipe-title');
+            const recipeShortDescriptionInput = document.getElementById('recipe-short-description');
+            const recipeImageURLInput = document.getElementById('recipe-image-url');
+            const recipeImageUploadInput = document.getElementById('recipe-image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            const recipeIngredientsInput = document.getElementById('recipe-ingredients');
+            const recipeInstructionsInput = document.getElementById('recipe-instructions');
+            const recipeTagsInput = document.getElementById('recipe-tags');
+            const submitRecipeBtn = document.getElementById('submit-recipe-btn');
 
-        // Footer
-        const currentYearSpan = document.getElementById('current-year');
-        const newsletterEmailInput = document.getElementById('newsletter-email');
-        const newsletterSubmitBtn = document.getElementById('newsletter-submit-btn');
-        
-        // Scroll-to-top
-        const scrollToTopBtn = document.getElementById('scroll-to-top');
+            // Recipe Detail Modal
+            const recipeDetailModal = document.getElementById('recipe-detail-modal');
+            const closeRecipeDetailModalBtn = document.getElementById('close-recipe-detail-modal');
+            const recipeDetailContent = document.getElementById('recipe-detail-content');
+            
+            // Comments
+            const commentsList = document.getElementById('comments-list');
+            const addCommentForm = document.getElementById('add-comment-form'); // Main comment form
+            const commentRecipeIdInput = document.getElementById('comment-recipe-id');
+            const commentTextInput = document.getElementById('comment-text');
 
-        // --- State Management (localStorage) ---
-        let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-        let comments = JSON.parse(localStorage.getItem('commentsDB')) || []; // Renamed to avoid conflict
-        let userProfile = JSON.parse(localStorage.getItem('userProfile')) || { displayName: 'Guest' };
-        let likedRecipesByUser = JSON.parse(localStorage.getItem('likedRecipesByUser')) || {}; // { recipeId: true }
+            // Auth Modals
+            const loginModal = document.getElementById('login-modal');
+            const registerModal = document.getElementById('register-modal');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginEmailInput = document.getElementById('login-email');
+            const loginPasswordInput = document.getElementById('login-password');
+            const registerEmailInput = document.getElementById('register-email');
+            const registerPasswordInput = document.getElementById('register-password');
+            const loginErrorDiv = document.getElementById('login-error');
+            const registerErrorDiv = document.getElementById('register-error');
+            const showRegisterLink = document.getElementById('show-register-link');
+            const showLoginLink = document.getElementById('show-login-link');
+            
+            // Footer & Scroll
+            const currentYearSpan = document.getElementById('current-year');
+            const newsletterEmailInput = document.getElementById('newsletter-email');
+            const newsletterSubmitBtn = document.getElementById('newsletter-submit-btn');
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
 
-        // --- Helper Functions ---
-        const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+            // --- State Management (localStorage) ---
+            let recipes = JSON.parse(localStorage.getItem('recipesV2')) || []; // recipes -> recipesV2
+            let comments = JSON.parse(localStorage.getItem('commentsV2')) || []; // commentsDB -> commentsV2
+            // userProfile artık Firebase currentUser tarafından yönetilecek.
+            // likedRecipesByUser, recipe objesinin içine likedBy: [userId1, userId2] olarak taşınabilir veya ayrı bir DB gibi yönetilebilir.
+            // Basitlik için recipe objesine `likedBy` dizisi ekleyelim.
 
-        const saveRecipes = () => localStorage.setItem('recipes', JSON.stringify(recipes));
-        const saveComments = () => localStorage.setItem('commentsDB', JSON.stringify(comments));
-        const saveUserProfile = () => localStorage.setItem('userProfile', JSON.stringify(userProfile));
-        const saveLikedRecipes = () => localStorage.setItem('likedRecipesByUser', JSON.stringify(likedRecipesByUser));
+            // --- Helper Functions ---
+            const generateId = () => '_' + Math.random().toString(36).substr(2, 9);
+            const saveRecipes = () => localStorage.setItem('recipesV2', JSON.stringify(recipes));
+            const saveComments = () => localStorage.setItem('commentsV2', JSON.stringify(comments));
 
-        const getFileBase64 = (file) => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
+            const getFileBase64 = (file) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
+                });
+            };
+
+            // --- Dark/Light Mode ---
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggleBtn.textContent = '☀️'; // Sun icon for light mode
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    themeToggleBtn.textContent = '🌙'; // Moon icon for dark mode
+                }
+            };
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
             });
-        };
 
-        // --- Navigation ---
-        menuToggleBtn.addEventListener('click', () => {
-            navLinksList.classList.toggle('active');
-        });
-        
-        const closeAllModals = () => {
-            addEditRecipeModal.style.display = 'none';
-            recipeDetailModal.style.display = 'none';
-            userProfileModal.style.display = 'none';
-        };
-        
-        // Close modals with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light
+            applyTheme(savedTheme);
+
+            // --- Navigation & Modal Management ---
+            menuToggleBtn.addEventListener('click', () => navLinksList.classList.toggle('active'));
+            
+            const closeAllModals = () => {
+                document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+            };
+
+            document.querySelectorAll('.close-btn').forEach(btn => {
+                btn.onclick = () => {
+                    const modalId = btn.dataset.modalId || btn.parentElement.parentElement.id;
+                    if (modalId) document.getElementById(modalId).style.display = 'none';
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeAllModals(); });
+            window.onclick = (event) => {
+                if (event.target.classList.contains('modal')) event.target.style.display = "none";
+            }
+
+            navHomeLink.addEventListener('click', (e) => { e.preventDefault(); closeAllModals(); navLinksList.classList.remove('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); renderRecipeGallery(); });
+            homeLinkLogo.addEventListener('click', (e) => { e.preventDefault(); navHomeLink.click(); });
+
+            // --- Firebase Authentication ---
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user; // Update global currentUser
+                if (user) { // User is signed in
+                    authUserDisplay.textContent = user.displayName || user.email;
+                    authUserDisplay.classList.remove('hidden');
+                    navLoginItem.classList.add('hidden');
+                    navRegisterItem.classList.add('hidden');
+                    navLogoutItem.classList.remove('hidden');
+                    navAddRecipeItem.classList.remove('hidden');
+                    addCommentForm.classList.remove('hidden'); // Show comment form
+                } else { // User is signed out
+                    authUserDisplay.textContent = '';
+                    authUserDisplay.classList.add('hidden');
+                    navLoginItem.classList.remove('hidden');
+                    navRegisterItem.classList.remove('hidden');
+                    navLogoutItem.classList.add('hidden');
+                    navAddRecipeItem.classList.add('hidden');
+                    addCommentForm.classList.add('hidden'); // Hide comment form
+                }
                 closeAllModals();
-            }
-        });
-
-        // Close modals by clicking outside
-        window.onclick = function(event) {
-            if (event.target == addEditRecipeModal) addEditRecipeModal.style.display = "none";
-            if (event.target == recipeDetailModal) recipeDetailModal.style.display = "none";
-            if (event.target == userProfileModal) userProfileModal.style.display = "none";
-        }
-
-        navHomeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeAllModals();
-            navLinksList.classList.remove('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            renderRecipeGallery(); // Refresh gallery
-        });
-        homeLinkLogo.addEventListener('click', (e) => {
-            e.preventDefault();
-            navHomeLink.click();
-        });
-
-
-        // --- Recipe Gallery Rendering ---
-        const renderRecipeCard = (recipe) => {
-            const card = document.createElement('article');
-            card.className = 'recipe-card';
-            card.dataset.id = recipe.id;
-
-            const isLiked = likedRecipesByUser[recipe.id];
-            
-            // Use placeholder if image is missing or invalid
-            let imageSrc = recipe.image || 'https://via.placeholder.com/300x200/FFE4E1/FF69B4?text=Recipe+Image';
-            if (recipe.image && !recipe.image.startsWith('http') && !recipe.image.startsWith('data:image')) {
-                 imageSrc = 'https://via.placeholder.com/300x200/FFE4E1/FF69B4?text=Image+Error';
-            }
-
-
-            card.innerHTML = `
-                <img src="${imageSrc}" alt="${recipe.title}" class="recipe-card-image">
-                <div class="recipe-card-content">
-                    <h3>${recipe.title}</h3>
-                    <p>${recipe.shortDescription}</p>
-                    <div class="recipe-card-meta">
-                        <span class="likes ${isLiked ? 'liked' : ''}" data-recipe-id="${recipe.id}" title="Like this recipe">
-                            <svg><use xlink:href="#icon-heart"></use></svg>
-                            <span class="like-count">${recipe.likes || 0}</span> Likes
-                        </span>
-                        <span>${recipe.tags ? recipe.tags.map(t => `#${t}`).join(' ') : ''}</span>
-                    </div>
-                    <button class="view-full-btn" data-id="${recipe.id}">View Full Recipe</button>
-                </div>
-            `;
-            card.querySelector('.view-full-btn').addEventListener('click', () => showRecipeDetail(recipe.id));
-            card.querySelector('.likes').addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent card click event if any
-                toggleLike(recipe.id, true); // true to re-render gallery for card update
-            });
-            return card;
-        };
-
-        const renderRecipeGallery = () => {
-            recipeGrid.innerHTML = '';
-            const searchTerm = searchInput.value.toLowerCase();
-            const currentSort = sortFilter.value;
-
-            let filteredRecipes = recipes.filter(recipe => {
-                const titleMatch = recipe.title.toLowerCase().includes(searchTerm);
-                const tagMatch = recipe.tags && recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-                return titleMatch || tagMatch;
+                renderRecipeGallery(); // Re-render to update like status and edit/delete buttons
+                // If recipe detail is open, re-render comments and detail buttons
+                if (recipeDetailModal.style.display === 'block' && commentRecipeIdInput.value) {
+                    showRecipeDetail(commentRecipeIdInput.value); // This will also re-render comments
+                }
             });
 
-            if (currentSort === 'most-liked') {
-                filteredRecipes.sort((a, b) => (b.likes || 0) - (a.likes || 0));
-            } else { // newest (default)
-                filteredRecipes.sort((a, b) => b.timestamp - a.timestamp);
-            }
+            navLoginBtn.addEventListener('click', (e) => { e.preventDefault(); closeAllModals(); loginModal.style.display = 'block'; navLinksList.classList.remove('active'); });
+            navRegisterBtn.addEventListener('click', (e) => { e.preventDefault(); closeAllModals(); registerModal.style.display = 'block'; navLinksList.classList.remove('active'); });
+            showRegisterLink.addEventListener('click', (e) => { e.preventDefault(); closeAllModals(); registerModal.style.display = 'block'; });
+            showLoginLink.addEventListener('click', (e) => { e.preventDefault(); closeAllModals(); loginModal.style.display = 'block'; });
 
-            if (filteredRecipes.length === 0) {
-                noRecipesMessage.classList.remove('hidden');
-            } else {
-                noRecipesMessage.classList.add('hidden');
-                filteredRecipes.forEach(recipe => {
-                    recipeGrid.appendChild(renderRecipeCard(recipe));
-                });
-            }
-        };
-
-        searchInput.addEventListener('input', renderRecipeGallery);
-        sortFilter.addEventListener('change', renderRecipeGallery);
-
-        // --- Add/Edit Recipe Functionality ---
-        navAddRecipeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            addEditModalTitle.textContent = 'Add New Recipe';
-            addEditRecipeForm.reset();
-            recipeIdInput.value = '';
-            imagePreview.style.display = 'none';
-            imagePreview.src = '#';
-            submitRecipeBtn.textContent = 'Add Recipe';
-            closeAllModals();
-            addEditRecipeModal.style.display = 'block';
-            navLinksList.classList.remove('active');
-        });
-
-        closeAddEditModalBtn.onclick = () => addEditRecipeModal.style.display = 'none';
-
-        recipeImageUploadInput.addEventListener('change', function() {
-            if (this.files && this.files[0]) {
-                const file = this.files[0];
-                getFileBase64(file).then(base64 => {
-                    imagePreview.src = base64;
-                    imagePreview.style.display = 'block';
-                    recipeImageURLInput.value = ''; // Clear URL if file is chosen
-                }).catch(err => {
-                    console.error("Error reading file for preview:", err);
-                    alert("Could not preview image. Please try another file or use a URL.");
-                    imagePreview.style.display = 'none';
-                });
-            } else {
-                imagePreview.style.display = 'none';
-            }
-        });
-        
-        recipeImageURLInput.addEventListener('input', function() {
-             if (this.value) {
-                imagePreview.src = this.value;
-                imagePreview.style.display = 'block';
-                recipeImageUploadInput.value = ''; // Clear file input
-            } else if (!recipeImageUploadInput.files[0]) {
-                 imagePreview.style.display = 'none';
-            }
-        });
-
-
-        addEditRecipeForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const id = recipeIdInput.value || generateId();
-            let imageValue = recipeImageURLInput.value;
-
-            if (recipeImageUploadInput.files && recipeImageUploadInput.files[0]) {
-                try {
-                    imageValue = await getFileBase64(recipeImageUploadInput.files[0]);
-                } catch (error) {
-                    console.error("Error converting image to Base64:", error);
-                    alert("Error processing image. Please try again or use an image URL.");
-                    return;
-                }
-            } else if (!imageValue && !recipeIdInput.value) { // No image URL and no file upload for new recipe
-                 imageValue = ''; // Allow no image
-            } else if (!imageValue && recipeIdInput.value) { // Editing and URL cleared, keep existing
-                const existingRecipe = recipes.find(r => r.id === id);
-                if (existingRecipe) imageValue = existingRecipe.image;
-            }
-
-
-            const newRecipeData = {
-                id: id,
-                title: recipeTitleInput.value.trim(),
-                shortDescription: recipeShortDescriptionInput.value.trim(),
-                image: imageValue,
-                ingredients: recipeIngredientsInput.value.trim().split('\n').filter(Boolean),
-                instructions: recipeInstructionsInput.value.trim(),
-                tags: recipeTagsInput.value.split(',').map(tag => tag.trim()).filter(Boolean),
-                timestamp: recipeIdInput.value ? recipes.find(r => r.id === id).timestamp : Date.now(),
-                likes: recipeIdInput.value ? recipes.find(r => r.id === id).likes || 0 : 0,
-            };
-            
-            if (recipeIdInput.value) { // Editing existing recipe
-                const index = recipes.findIndex(r => r.id === id);
-                if (index !== -1) {
-                    recipes[index] = { ...recipes[index], ...newRecipeData }; // Preserve original likes and timestamp if not updated by form
-                }
-            } else { // Adding new recipe
-                recipes.push(newRecipeData);
-            }
-
-            saveRecipes();
-            renderRecipeGallery();
-            addEditRecipeModal.style.display = 'none';
-        });
-
-        const openEditRecipeForm = (recipeId) => {
-            const recipe = recipes.find(r => r.id === recipeId);
-            if (!recipe) return;
-
-            addEditModalTitle.textContent = 'Edit Recipe';
-            recipeIdInput.value = recipe.id;
-            recipeTitleInput.value = recipe.title;
-            recipeShortDescriptionInput.value = recipe.shortDescription;
-            
-            if (recipe.image && recipe.image.startsWith('data:image')) { // Base64
-                imagePreview.src = recipe.image;
-                imagePreview.style.display = 'block';
-                recipeImageURLInput.value = '';
-                recipeImageUploadInput.value = '';
-            } else if (recipe.image) { // URL
-                recipeImageURLInput.value = recipe.image;
-                imagePreview.src = recipe.image;
-                imagePreview.style.display = 'block';
-                recipeImageUploadInput.value = '';
-            } else {
-                imagePreview.style.display = 'none';
-                imagePreview.src = '#';
-                recipeImageURLInput.value = '';
-                 recipeImageUploadInput.value = '';
-            }
-
-            recipeIngredientsInput.value = recipe.ingredients.join('\n');
-            recipeInstructionsInput.value = recipe.instructions;
-            recipeTagsInput.value = recipe.tags.join(', ');
-            submitRecipeBtn.textContent = 'Save Changes';
-            
-            closeAllModals();
-            addEditRecipeModal.style.display = 'block';
-        };
-        
-        const deleteRecipe = (recipeId) => {
-            if (!confirm('Are you sure you want to delete this recipe? This will also delete its comments and likes.')) return;
-
-            recipes = recipes.filter(r => r.id !== recipeId);
-            comments = comments.filter(c => c.recipeId !== recipeId); // Delete associated comments
-            delete likedRecipesByUser[recipeId]; // Remove from liked list
-
-            saveRecipes();
-            saveComments();
-            saveLikedRecipes();
-            renderRecipeGallery();
-            recipeDetailModal.style.display = 'none'; // Close detail view if open
-        };
-
-        // --- Recipe Detail View ---
-        closeRecipeDetailModalBtn.onclick = () => recipeDetailModal.style.display = 'none';
-
-        const showRecipeDetail = (recipeId) => {
-            const recipe = recipes.find(r => r.id === recipeId);
-            if (!recipe) return;
-
-            commentRecipeIdInput.value = recipeId; // Set for new comment form
-            const isLiked = likedRecipesByUser[recipe.id];
-            let imageDetailSrc = recipe.image || 'https://via.placeholder.com/600x400/FFE4E1/FF69B4?text=Recipe+Image';
-             if (recipe.image && !recipe.image.startsWith('http') && !recipe.image.startsWith('data:image')) {
-                 imageDetailSrc = 'https://via.placeholder.com/600x400/FFE4E1/FF69B4?text=Image+Error';
-            }
-
-            recipeDetailContent.innerHTML = `
-                <img src="${imageDetailSrc}" alt="${recipe.title}" class="recipe-detail-media">
-                <h2>${recipe.title}</h2>
-                <p>${recipe.shortDescription}</p>
-                
-                <h4>Ingredients:</h4>
-                <ul>${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}</ul>
-                
-                <h4>Instructions:</h4>
-                <div class="instructions-text">${recipe.instructions.replace(/\n/g, '<br>')}</div>
-                
-                <p><strong>Tags:</strong> ${recipe.tags ? recipe.tags.map(t => `#${t}`).join(' ') : 'None'}</p>
-                <p><strong>Likes:</strong> <span id="detail-like-count">${recipe.likes || 0}</span></p>
-
-                <div class="recipe-detail-actions">
-                    <button class="like-btn ${isLiked ? 'liked' : ''}" id="detail-like-btn" data-recipe-id="${recipe.id}">
-                        <svg><use xlink:href="#icon-heart"></use></svg> ${isLiked ? 'Liked' : 'Like'}
-                    </button>
-                    <button id="edit-recipe-btn" data-id="${recipe.id}">Edit Recipe</button>
-                    <button id="delete-recipe-btn" data-id="${recipe.id}" style="background-color: #DC143C;">Delete Recipe</button>
-                </div>
-            `;
-            
-            document.getElementById('detail-like-btn').addEventListener('click', function() {
-                toggleLike(recipe.id, false); // false, don't re-render whole gallery
-                // Update button text and style locally for immediate feedback
-                const currentRecipe = recipes.find(r => r.id === recipe.id); // Get updated recipe
-                this.classList.toggle('liked', likedRecipesByUser[recipe.id]);
-                this.innerHTML = `<svg><use xlink:href="#icon-heart"></use></svg> ${likedRecipesByUser[recipe.id] ? 'Liked' : 'Like'}`;
-                document.getElementById('detail-like-count').textContent = currentRecipe.likes || 0;
-            });
-            document.getElementById('edit-recipe-btn').addEventListener('click', () => openEditRecipeForm(recipe.id));
-            document.getElementById('delete-recipe-btn').addEventListener('click', () => deleteRecipe(recipe.id));
-            
-            renderComments(recipeId);
-            closeAllModals();
-            recipeDetailModal.style.display = 'block';
-        };
-        
-        // --- Like System ---
-        const toggleLike = (recipeId, updateGallery = false) => {
-            const recipe = recipes.find(r => r.id === recipeId);
-            if (!recipe) return;
-
-            if (likedRecipesByUser[recipeId]) {
-                recipe.likes = (recipe.likes || 0) - 1;
-                delete likedRecipesByUser[recipeId];
-            } else {
-                recipe.likes = (recipe.likes || 0) + 1;
-                likedRecipesByUser[recipeId] = true;
-            }
-            if (recipe.likes < 0) recipe.likes = 0; // Ensure likes don't go negative
-
-            saveRecipes();
-            saveLikedRecipes();
-
-            if (updateGallery) {
-                renderRecipeGallery(); // Re-render gallery to update card
-            } else { // Update only detail view if open
-                const detailLikeCount = document.getElementById('detail-like-count');
-                if (detailLikeCount && recipeDetailModal.style.display === 'block') {
-                    detailLikeCount.textContent = recipe.likes;
-                }
-                 const detailLikeBtn = document.getElementById('detail-like-btn');
-                 if(detailLikeBtn && detailLikeBtn.dataset.recipeId === recipeId) {
-                    detailLikeBtn.classList.toggle('liked', likedRecipesByUser[recipeId]);
-                    detailLikeBtn.innerHTML = `<svg><use xlink:href="#icon-heart"></use></svg> ${likedRecipesByUser[recipeId] ? 'Liked' : 'Like'}`;
-                 }
-            }
-        };
-
-
-        // --- Comment System ---
-        const renderComments = (recipeId) => {
-            commentsList.innerHTML = '';
-            const recipeComments = comments.filter(c => c.recipeId === recipeId && !c.parentId)
-                                         .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-            if (recipeComments.length === 0) {
-                commentsList.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
-            } else {
-                recipeComments.forEach(comment => {
-                    commentsList.appendChild(createCommentElement(comment, recipeId));
-                });
-            }
-        };
-
-        const createCommentElement = (comment, recipeId, isReply = false) => {
-            const div = document.createElement('div');
-            div.className = `comment ${isReply ? 'reply' : ''}`;
-            div.dataset.commentId = comment.id;
-
-            const replies = comments.filter(r => r.parentId === comment.id)
-                                    .sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
-
-            div.innerHTML = `
-                <div class="comment-header">
-                    <span class="comment-author">${comment.authorName || 'Anonymous'}</span>
-                    <span class="comment-date">${new Date(comment.timestamp).toLocaleString()}</span>
-                </div>
-                <p class="comment-body">${comment.text.replace(/\n/g, '<br>')}</p>
-                <div class="comment-actions">
-                    ${!isReply ? '<button class="reply-to-comment-btn">Reply</button>' : ''}
-                    ${comment.authorName === userProfile.displayName ? `
-                        <button class="edit-comment-btn">Edit</button>
-                        <button class="delete-comment-btn">Delete</button>
-                    ` : ''}
-                </div>
-                ${!isReply ? '<div class="reply-form-container hidden"></div>' : ''}
-                <div class="replies">
-                    ${replies.map(reply => createCommentElement(reply, recipeId, true).outerHTML).join('')}
-                </div>
-            `;
-
-            if (!isReply) {
-                const replyBtn = div.querySelector('.reply-to-comment-btn');
-                if (replyBtn) {
-                    replyBtn.addEventListener('click', () => toggleReplyForm(comment.id, div.querySelector('.reply-form-container')));
-                }
-            }
-            
-            const editBtn = div.querySelector('.edit-comment-btn');
-            if (editBtn) editBtn.addEventListener('click', () => showEditCommentForm(comment.id, div));
-            
-            const deleteBtn = div.querySelector('.delete-comment-btn');
-            if (deleteBtn) deleteBtn.addEventListener('click', () => deleteComment(comment.id, recipeId));
-
-            return div;
-        };
-
-        const toggleReplyForm = (parentId, container) => {
-            if (container.classList.contains('hidden')) {
-                container.classList.remove('hidden');
-                container.innerHTML = `
-                    <form class="reply-form">
-                        <textarea placeholder="Write your reply..." rows="2" required></textarea>
-                        <button type="submit">Post Reply</button>
-                        <button type="button" class="cancel-reply-btn">Cancel</button>
-                    </form>
-                `;
-                container.querySelector('.reply-form').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const text = e.target.querySelector('textarea').value.trim();
-                    if (text) {
-                        handleCommentSubmit(commentRecipeIdInput.value, text, parentId);
-                        container.classList.add('hidden'); // Hide form after submitting
-                        container.innerHTML = ''; // Clear form
-                    }
-                });
-                container.querySelector('.cancel-reply-btn').addEventListener('click', () => {
-                     container.classList.add('hidden');
-                     container.innerHTML = '';
-                });
-            } else {
-                container.classList.add('hidden');
-                container.innerHTML = '';
-            }
-        };
-        
-        const showEditCommentForm = (commentId, commentElement) => {
-            const comment = comments.find(c => c.id === commentId);
-            if (!comment) return;
-
-            const commentBody = commentElement.querySelector('.comment-body');
-            const commentActions = commentElement.querySelector('.comment-actions');
-            
-            const originalText = comment.text;
-            commentBody.innerHTML = `
-                <form class="edit-comment-form">
-                    <textarea rows="3">${originalText}</textarea>
-                    <button type="submit">Save</button>
-                    <button type="button" class="cancel-edit-btn">Cancel</button>
-                </form>
-            `;
-            commentActions.classList.add('hidden'); // Hide actions while editing
-
-            const editForm = commentBody.querySelector('.edit-comment-form');
-            editForm.addEventListener('submit', (e) => {
+            loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const newText = editForm.querySelector('textarea').value.trim();
-                if (newText && newText !== originalText) {
-                    comment.text = newText;
-                    saveComments();
-                    renderComments(comment.recipeId); // Re-render all comments for simplicity
-                } else { // If no change or empty, revert
-                    commentBody.innerHTML = originalText.replace(/\n/g, '<br>');
-                    commentActions.classList.remove('hidden');
+                loginErrorDiv.classList.add('hidden');
+                const email = loginEmailInput.value;
+                const password = loginPasswordInput.value;
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => { /* Handled by onAuthStateChanged */ })
+                    .catch((error) => {
+                        loginErrorDiv.textContent = "Giriş başarısız: " + error.message.replace('Firebase: ', '');
+                        loginErrorDiv.classList.remove('hidden');
+                    });
+            });
+
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                registerErrorDiv.classList.add('hidden');
+                const email = registerEmailInput.value;
+                const password = registerPasswordInput.value;
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        // Optionally set a default display name here if needed
+                        // updateProfile(userCredential.user, { displayName: email.split('@')[0] });
+                        /* Handled by onAuthStateChanged */
+                    })
+                    .catch((error) => {
+                        registerErrorDiv.textContent = "Kayıt başarısız: " + error.message.replace('Firebase: ', '');
+                        registerErrorDiv.classList.remove('hidden');
+                    });
+            });
+
+            navLogoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                firebaseSignOut(auth).catch((error) => console.error("Logout Error:", error));
+                navLinksList.classList.remove('active');
+            });
+
+
+            // --- Recipe Gallery Rendering ---
+            const renderRecipeCard = (recipe) => {
+                const card = document.createElement('article');
+                card.className = 'recipe-card';
+                card.dataset.id = recipe.id;
+
+                const isLikedByCurrentUser = currentUser && recipe.likedBy && recipe.likedBy.includes(currentUser.uid);
+                
+                let imageSrc = recipe.image || `https://via.placeholder.com/300x200/${getComputedStyle(document.documentElement).getPropertyValue('--placeholder-img-bg').trim().substring(1)}/${getComputedStyle(document.documentElement).getPropertyValue('--placeholder-img-text').trim().substring(1)}?text=Tarif+Görseli`;
+                if (recipe.image && !recipe.image.startsWith('http') && !recipe.image.startsWith('data:image')) {
+                    imageSrc = `https://via.placeholder.com/300x200/FF0000/FFFFFF?text=Görsel+Hatası`;
                 }
-            });
-            editForm.querySelector('.cancel-edit-btn').addEventListener('click', () => {
-                commentBody.innerHTML = originalText.replace(/\n/g, '<br>');
-                commentActions.classList.remove('hidden');
-            });
-        };
 
-        const deleteComment = (commentId, recipeId) => {
-            if (!confirm('Are you sure you want to delete this comment? If it has replies, they will also be deleted.')) return;
-            
-            // Find and remove the comment and its direct replies
-            const commentIndex = comments.findIndex(c => c.id === commentId);
-            if (commentIndex > -1) {
-                comments.splice(commentIndex, 1); // Remove parent comment
-                // Remove replies to this comment
-                comments = comments.filter(reply => reply.parentId !== commentId);
-                saveComments();
-                renderComments(recipeId);
-            }
-        };
-
-        const handleCommentSubmit = (recipeId, text, parentId = null) => {
-            const newComment = {
-                id: generateId(),
-                recipeId: recipeId,
-                parentId: parentId,
-                text: text,
-                authorName: userProfile.displayName || 'Anonymous',
-                timestamp: new Date().toISOString()
+                card.innerHTML = `
+                    <img src="${imageSrc}" alt="${recipe.title}" class="recipe-card-image">
+                    <div class="recipe-card-content">
+                        <h3>${recipe.title}</h3>
+                        <p>${recipe.shortDescription}</p>
+                        <div class="recipe-card-meta">
+                            <span class="likes ${isLikedByCurrentUser ? 'liked' : ''}" data-recipe-id="${recipe.id}" title="Bu tarifi beğen">
+                                <svg><use xlink:href="#icon-heart"></use></svg>
+                                <span class="like-count">${recipe.likedBy ? recipe.likedBy.length : 0}</span> Beğeni
+                            </span>
+                            <span>${recipe.tags ? recipe.tags.map(t => `#${t}`).join(' ') : ''}</span>
+                        </div>
+                        <button class="view-full-btn" data-id="${recipe.id}">Tamamını Gör</button>
+                    </div>
+                `;
+                card.querySelector('.view-full-btn').addEventListener('click', () => showRecipeDetail(recipe.id));
+                const likeElement = card.querySelector('.likes');
+                if (currentUser) { // Only allow liking if logged in
+                    likeElement.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleLike(recipe.id, true);
+                    });
+                } else {
+                    likeElement.style.cursor = 'default';
+                    likeElement.title = 'Beğenmek için giriş yapın';
+                }
+                return card;
             };
-            comments.push(newComment);
-            saveComments();
-            renderComments(recipeId);
-            if (!parentId) { // If not a reply, clear main comment form
-                commentTextInput.value = '';
+
+            const renderRecipeGallery = () => {
+                recipeGrid.innerHTML = '';
+                const searchTerm = searchInput.value.toLowerCase();
+                const currentSort = sortFilter.value;
+
+                let filteredRecipes = recipes.filter(recipe => {
+                    const titleMatch = recipe.title.toLowerCase().includes(searchTerm);
+                    const tagMatch = recipe.tags && recipe.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                    return titleMatch || tagMatch;
+                });
+
+                if (currentSort === 'most-liked') {
+                    filteredRecipes.sort((a, b) => (b.likedBy ? b.likedBy.length : 0) - (a.likedBy ? a.likedBy.length : 0));
+                } else { // newest (default)
+                    filteredRecipes.sort((a, b) => b.timestamp - a.timestamp);
+                }
+
+                if (filteredRecipes.length === 0) {
+                    noRecipesMessage.classList.remove('hidden');
+                } else {
+                    noRecipesMessage.classList.add('hidden');
+                    filteredRecipes.forEach(recipe => recipeGrid.appendChild(renderRecipeCard(recipe)));
+                }
+            };
+
+            searchInput.addEventListener('input', renderRecipeGallery);
+            sortFilter.addEventListener('change', renderRecipeGallery);
+
+            // --- Add/Edit Recipe Functionality ---
+            navAddRecipeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (!currentUser) { alert("Tarif eklemek için giriş yapmalısınız."); return; }
+                addEditModalTitle.textContent = 'Yeni Tarif Ekle';
+                addEditRecipeForm.reset();
+                recipeIdInput.value = '';
+                imagePreview.style.display = 'none'; imagePreview.src = '#';
+                submitRecipeBtn.textContent = 'Tarifi Ekle';
+                closeAllModals(); addEditRecipeModal.style.display = 'block';
+                navLinksList.classList.remove('active');
+            });
+
+            closeAddEditModalBtn.onclick = () => addEditRecipeModal.style.display = 'none';
+
+            recipeImageUploadInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    getFileBase64(this.files[0]).then(base64 => {
+                        imagePreview.src = base64; imagePreview.style.display = 'block';
+                        recipeImageURLInput.value = '';
+                    }).catch(err => { console.error("Resim önizleme hatası:", err); alert("Resim önizlenemedi."); imagePreview.style.display = 'none';});
+                } else { imagePreview.style.display = 'none'; }
+            });
+            recipeImageURLInput.addEventListener('input', function() {
+                if (this.value) { imagePreview.src = this.value; imagePreview.style.display = 'block'; recipeImageUploadInput.value = '';}
+                else if (!recipeImageUploadInput.files[0]) { imagePreview.style.display = 'none'; }
+            });
+
+            addEditRecipeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!currentUser) { alert("Bu işlem için giriş yapmalısınız."); return; }
+
+                const id = recipeIdInput.value || generateId();
+                let imageValue = recipeImageURLInput.value;
+
+                if (recipeImageUploadInput.files && recipeImageUploadInput.files[0]) {
+                    try { imageValue = await getFileBase64(recipeImageUploadInput.files[0]); }
+                    catch (error) { console.error("Base64'e çevirme hatası:", error); alert("Resim işlenirken hata oluştu."); return; }
+                } else if (!imageValue && !recipeIdInput.value) { imageValue = ''; }
+                else if (!imageValue && recipeIdInput.value) {
+                    const existingRecipe = recipes.find(r => r.id === id);
+                    if (existingRecipe) imageValue = existingRecipe.image;
+                }
+
+                const recipeData = {
+                    id: id,
+                    title: recipeTitleInput.value.trim(),
+                    shortDescription: recipeShortDescriptionInput.value.trim(),
+                    image: imageValue,
+                    ingredients: recipeIngredientsInput.value.trim().split('\n').filter(Boolean),
+                    instructions: recipeInstructionsInput.value.trim(),
+                    tags: recipeTagsInput.value.split(',').map(tag => tag.trim()).filter(Boolean),
+                    timestamp: Date.now(), // Always update timestamp on edit too, or keep original? For simplicity, update.
+                    userId: currentUser.uid, // Store user ID
+                    likedBy: recipeIdInput.value ? (recipes.find(r => r.id === id).likedBy || []) : [] // Preserve likes if editing
+                };
+                
+                if (recipeIdInput.value) { // Editing
+                    const index = recipes.findIndex(r => r.id === id);
+                    if (index !== -1 && recipes[index].userId === currentUser.uid) { // Check ownership
+                        recipes[index] = { ...recipes[index], ...recipeData, likedBy: recipes[index].likedBy }; // Ensure likedBy is preserved
+                    } else if (index !== -1) {
+                        alert("Bu tarifi düzenleme yetkiniz yok."); return;
+                    }
+                } else { // Adding new
+                    recipeData.timestamp = Date.now(); // Set creation timestamp
+                    recipes.push(recipeData);
+                }
+                saveRecipes(); renderRecipeGallery(); addEditRecipeModal.style.display = 'none';
+            });
+
+            const openEditRecipeForm = (recipeId) => {
+                const recipe = recipes.find(r => r.id === recipeId);
+                if (!recipe) return;
+                if (!currentUser || recipe.userId !== currentUser.uid) { alert("Bu tarifi düzenleme yetkiniz yok."); return; }
+
+                addEditModalTitle.textContent = 'Tarifi Düzenle';
+                recipeIdInput.value = recipe.id;
+                recipeTitleInput.value = recipe.title;
+                recipeShortDescriptionInput.value = recipe.shortDescription;
+                if (recipe.image && recipe.image.startsWith('data:image')) { imagePreview.src = recipe.image; imagePreview.style.display = 'block'; recipeImageURLInput.value = ''; recipeImageUploadInput.value = ''; }
+                else if (recipe.image) { recipeImageURLInput.value = recipe.image; imagePreview.src = recipe.image; imagePreview.style.display = 'block'; recipeImageUploadInput.value = ''; }
+                else { imagePreview.style.display = 'none'; imagePreview.src = '#'; recipeImageURLInput.value = ''; recipeImageUploadInput.value = ''; }
+                recipeIngredientsInput.value = recipe.ingredients.join('\n');
+                recipeInstructionsInput.value = recipe.instructions;
+                recipeTagsInput.value = recipe.tags.join(', ');
+                submitRecipeBtn.textContent = 'Değişiklikleri Kaydet';
+                closeAllModals(); addEditRecipeModal.style.display = 'block';
+            };
+            
+            const deleteRecipe = (recipeId) => {
+                const recipe = recipes.find(r => r.id === recipeId);
+                if (!recipe) return;
+                if (!currentUser || recipe.userId !== currentUser.uid) { alert("Bu tarifi silme yetkiniz yok."); return; }
+                if (!confirm('Bu tarifi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) return;
+
+                recipes = recipes.filter(r => r.id !== recipeId);
+                comments = comments.filter(c => c.recipeId !== recipeId);
+                saveRecipes(); saveComments(); renderRecipeGallery();
+                recipeDetailModal.style.display = 'none';
+            };
+
+            // --- Recipe Detail View ---
+            closeRecipeDetailModalBtn.onclick = () => recipeDetailModal.style.display = 'none';
+
+            const showRecipeDetail = (recipeId) => {
+                const recipe = recipes.find(r => r.id === recipeId);
+                if (!recipe) return;
+
+                commentRecipeIdInput.value = recipeId;
+                const isLikedByCurrentUser = currentUser && recipe.likedBy && recipe.likedBy.includes(currentUser.uid);
+                let imageDetailSrc = recipe.image || `https://via.placeholder.com/600x400/${getComputedStyle(document.documentElement).getPropertyValue('--placeholder-img-bg').trim().substring(1)}/${getComputedStyle(document.documentElement).getPropertyValue('--placeholder-img-text').trim().substring(1)}?text=Tarif+Görseli`;
+                if (recipe.image && !recipe.image.startsWith('http') && !recipe.image.startsWith('data:image')) {
+                    imageDetailSrc = `https://via.placeholder.com/600x400/FF0000/FFFFFF?text=Görsel+Hatası`;
+                }
+
+                recipeDetailContent.innerHTML = `
+                    <img src="${imageDetailSrc}" alt="${recipe.title}" class="recipe-detail-media">
+                    <h2>${recipe.title}</h2>
+                    <p>${recipe.shortDescription}</p>
+                    <h4>Malzemeler:</h4>
+                    <ul>${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}</ul>
+                    <h4>Talimatlar:</h4>
+                    <div class="instructions-text">${recipe.instructions.replace(/\n/g, '<br>')}</div>
+                    <p><strong>Etiketler:</strong> ${recipe.tags ? recipe.tags.map(t => `#${t}`).join(' ') : 'Yok'}</p>
+                    <p><strong>Beğeniler:</strong> <span id="detail-like-count">${recipe.likedBy ? recipe.likedBy.length : 0}</span></p>
+                    <div class="recipe-detail-actions">
+                        ${currentUser ? `<button class="like-btn ${isLikedByCurrentUser ? 'liked' : ''}" id="detail-like-btn" data-recipe-id="${recipe.id}">
+                            <svg><use xlink:href="#icon-heart"></use></svg> ${isLikedByCurrentUser ? 'Beğenildi' : 'Beğen'}
+                        </button>` : '<p style="font-size:0.9em; color: var(--text-color);">Beğenmek için giriş yapın.</p>'}
+                        ${currentUser && recipe.userId === currentUser.uid ? `
+                            <button id="edit-recipe-btn" data-id="${recipe.id}">Tarifi Düzenle</button>
+                            <button id="delete-recipe-btn" data-id="${recipe.id}" style="background-color: #E74C3C;">Tarifi Sil</button>
+                        ` : ''}
+                    </div>
+                `;
+                
+                if (currentUser) {
+                    const detailLikeBtn = document.getElementById('detail-like-btn');
+                    if (detailLikeBtn) {
+                        detailLikeBtn.addEventListener('click', function() {
+                            toggleLike(recipe.id, false);
+                        });
+                    }
+                }
+                const editBtn = document.getElementById('edit-recipe-btn');
+                if (editBtn) editBtn.addEventListener('click', () => openEditRecipeForm(recipe.id));
+                const deleteBtn = document.getElementById('delete-recipe-btn');
+                if (deleteBtn) deleteBtn.addEventListener('click', () => deleteRecipe(recipe.id));
+                
+                renderComments(recipeId);
+                closeAllModals(); recipeDetailModal.style.display = 'block';
+            };
+            
+            // --- Like System ---
+            const toggleLike = (recipeId, updateGallery = false) => {
+                if (!currentUser) { alert("Beğenmek için giriş yapmalısınız."); return; }
+                const recipeIndex = recipes.findIndex(r => r.id === recipeId);
+                if (recipeIndex === -1) return;
+
+                const recipe = recipes[recipeIndex];
+                if (!recipe.likedBy) recipe.likedBy = [];
+
+                const userLikeIndex = recipe.likedBy.indexOf(currentUser.uid);
+
+                if (userLikeIndex > -1) { // User already liked, so unlike
+                    recipe.likedBy.splice(userLikeIndex, 1);
+                } else { // User hasn't liked, so like
+                    recipe.likedBy.push(currentUser.uid);
+                }
+                
+                saveRecipes();
+
+                if (updateGallery) {
+                    renderRecipeGallery();
+                } else { // Update detail view
+                    const detailLikeCount = document.getElementById('detail-like-count');
+                    const detailLikeBtn = document.getElementById('detail-like-btn');
+                    if (detailLikeCount && recipeDetailModal.style.display === 'block' && detailLikeBtn.dataset.recipeId === recipeId) {
+                        detailLikeCount.textContent = recipe.likedBy.length;
+                        const isLiked = recipe.likedBy.includes(currentUser.uid);
+                        detailLikeBtn.classList.toggle('liked', isLiked);
+                        detailLikeBtn.innerHTML = `<svg><use xlink:href="#icon-heart"></use></svg> ${isLiked ? 'Beğenildi' : 'Beğen'}`;
+                    }
+                }
+            };
+
+            // --- Comment System ---
+            const renderComments = (recipeId) => {
+                commentsList.innerHTML = '';
+                const recipeComments = comments.filter(c => c.recipeId === recipeId && !c.parentId)
+                                             .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                if (recipeComments.length === 0) {
+                    commentsList.innerHTML = '<p>Henüz yorum yok. İlk yorumu siz yapın!</p>';
+                } else {
+                    recipeComments.forEach(comment => commentsList.appendChild(createCommentElement(comment, recipeId)));
+                }
+            };
+
+            const createCommentElement = (comment, recipeId, isReply = false) => {
+                const div = document.createElement('div');
+                div.className = `comment ${isReply ? 'reply' : ''}`;
+                div.dataset.commentId = comment.id;
+
+                const replies = comments.filter(r => r.parentId === comment.id)
+                                        .sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+                
+                const canEditOrDelete = currentUser && comment.userId === currentUser.uid;
+
+                div.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.authorName || 'Anonim'}</span>
+                        <span class="comment-date">${new Date(comment.timestamp).toLocaleString()}</span>
+                    </div>
+                    <p class="comment-body">${comment.text.replace(/\n/g, '<br>')}</p>
+                    <div class="comment-actions">
+                        ${currentUser && !isReply ? '<button class="reply-to-comment-btn">Yanıtla</button>' : ''}
+                        ${canEditOrDelete ? `
+                            <button class="edit-comment-btn">Düzenle</button>
+                            <button class="delete-comment-btn">Sil</button>
+                        ` : ''}
+                    </div>
+                    ${!isReply ? '<div class="reply-form-container hidden"></div>' : ''}
+                    <div class="replies">${replies.map(reply => createCommentElement(reply, recipeId, true).outerHTML).join('')}</div>
+                `;
+
+                if (currentUser && !isReply) {
+                    const replyBtn = div.querySelector('.reply-to-comment-btn');
+                    if (replyBtn) replyBtn.addEventListener('click', () => toggleReplyForm(comment.id, div.querySelector('.reply-form-container')));
+                }
+                if (canEditOrDelete) {
+                    const editBtn = div.querySelector('.edit-comment-btn');
+                    if (editBtn) editBtn.addEventListener('click', () => showEditCommentForm(comment.id, div));
+                    const deleteBtn = div.querySelector('.delete-comment-btn');
+                    if (deleteBtn) deleteBtn.addEventListener('click', () => deleteComment(comment.id, recipeId));
+                }
+                return div;
+            };
+
+            const toggleReplyForm = (parentId, container) => {
+                if (container.classList.contains('hidden')) {
+                    container.classList.remove('hidden');
+                    container.innerHTML = `
+                        <form class="reply-form">
+                            <textarea placeholder="Yanıtınızı yazın..." rows="2" required></textarea>
+                            <button type="submit">Yanıtı Gönder</button>
+                            <button type="button" class="cancel-reply-btn">İptal</button>
+                        </form>`;
+                    container.querySelector('.reply-form').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        const text = e.target.querySelector('textarea').value.trim();
+                        if (text) { handleCommentSubmit(commentRecipeIdInput.value, text, parentId); container.classList.add('hidden'); container.innerHTML = ''; }
+                    });
+                    container.querySelector('.cancel-reply-btn').addEventListener('click', () => { container.classList.add('hidden'); container.innerHTML = ''; });
+                } else { container.classList.add('hidden'); container.innerHTML = ''; }
+            };
+            
+            const showEditCommentForm = (commentId, commentElement) => {
+                const comment = comments.find(c => c.id === commentId);
+                if (!comment || !currentUser || comment.userId !== currentUser.uid) return;
+
+                const commentBody = commentElement.querySelector('.comment-body');
+                const commentActions = commentElement.querySelector('.comment-actions');
+                const originalText = comment.text;
+                commentBody.innerHTML = `
+                    <form class="edit-comment-form">
+                        <textarea rows="3">${originalText}</textarea>
+                        <button type="submit">Kaydet</button> <button type="button" class="cancel-edit-btn">İptal</button>
+                    </form>`;
+                commentActions.classList.add('hidden');
+
+                const editForm = commentBody.querySelector('.edit-comment-form');
+                editForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newText = editForm.querySelector('textarea').value.trim();
+                    if (newText && newText !== originalText) { comment.text = newText; saveComments(); renderComments(comment.recipeId); }
+                    else { commentBody.innerHTML = originalText.replace(/\n/g, '<br>'); commentActions.classList.remove('hidden'); }
+                });
+                editForm.querySelector('.cancel-edit-btn').addEventListener('click', () => { commentBody.innerHTML = originalText.replace(/\n/g, '<br>'); commentActions.classList.remove('hidden'); });
+            };
+
+            const deleteComment = (commentId, recipeId) => {
+                const comment = comments.find(c => c.id === commentId);
+                if (!comment || !currentUser || comment.userId !== currentUser.uid) { alert("Bu yorumu silme yetkiniz yok."); return; }
+                if (!confirm('Bu yorumu silmek istediğinizden emin misiniz?')) return;
+                
+                comments = comments.filter(c => c.id !== commentId && c.parentId !== commentId); // Remove comment and its replies
+                saveComments(); renderComments(recipeId);
+            };
+
+            const handleCommentSubmit = (recipeId, text, parentId = null) => {
+                if (!currentUser) { alert("Yorum yapmak için giriş yapmalısınız."); return; }
+                const newComment = {
+                    id: generateId(), recipeId: recipeId, parentId: parentId, text: text,
+                    userId: currentUser.uid, authorName: currentUser.displayName || currentUser.email.split('@')[0],
+                    timestamp: new Date().toISOString()
+                };
+                comments.push(newComment); saveComments(); renderComments(recipeId);
+                if (!parentId) commentTextInput.value = '';
+            };
+            
+            addCommentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const recipeId = commentRecipeIdInput.value;
+                const text = commentTextInput.value.trim();
+                if (text && recipeId) handleCommentSubmit(recipeId, text);
+            });
+
+            // --- Footer & Scroll ---
+            currentYearSpan.textContent = new Date().getFullYear();
+            newsletterSubmitBtn.addEventListener('click', (e) => {
+                e.preventDefault(); const email = newsletterEmailInput.value.trim();
+                if(email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert(`${email} ile abone olduğunuz için teşekkürler! (Bu bir demo)`); localStorage.setItem('newsletterSub', email); newsletterEmailInput.value = ''; }
+                else { alert('Lütfen geçerli bir e-posta adresi girin.'); }
+            });
+            window.onscroll = () => { (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? scrollToTopBtn.style.display = "flex" : scrollToTopBtn.style.display = "none"; };
+            scrollToTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+            // --- Initial Load & Dummy Data ---
+            if (recipes.length === 0) {
+                recipes = [ /* Örnek tarifleri buraya ekleyebilirsiniz, userId olmadan veya genel bir demo userId ile */ ];
+                saveRecipes();
             }
-        };
-        
-        addCommentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const recipeId = commentRecipeIdInput.value;
-            const text = commentTextInput.value.trim();
-            if (text && recipeId) {
-                handleCommentSubmit(recipeId, text);
-            }
-        });
-
-
-        // --- User Profile Modal ---
-        profileBtn.addEventListener('click', () => {
-            displayNameInput.value = userProfile.displayName === 'Guest' ? '' : userProfile.displayName;
-            profileMessage.textContent = '';
-            closeAllModals();
-            userProfileModal.style.display = 'block';
-        });
-        closeProfileModalBtn.onclick = () => userProfileModal.style.display = 'none';
-
-        userProfileForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const newName = displayNameInput.value.trim();
-            if (newName) {
-                userProfile.displayName = newName;
-                saveUserProfile();
-                profileMessage.textContent = 'Profile saved successfully!';
-                profileMessage.style.color = 'green';
-                setTimeout(() => {
-                     userProfileModal.style.display = 'none';
-                     // Re-render comments if a recipe detail view is open, to update author names
-                     if(recipeDetailModal.style.display === 'block' && commentRecipeIdInput.value) {
-                        renderComments(commentRecipeIdInput.value);
-                     }
-                }, 1500);
-            } else {
-                profileMessage.textContent = 'Display name cannot be empty.';
-                 profileMessage.style.color = 'red';
-            }
-        });
-
-        // --- Footer ---
-        currentYearSpan.textContent = new Date().getFullYear();
-        newsletterSubmitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const email = newsletterEmailInput.value.trim();
-            if(email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { // Basic email validation
-                alert(`Thank you for subscribing with ${email}! (This is a demo)`);
-                localStorage.setItem('newsletterSub', email); // Demo storage
-                newsletterEmailInput.value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        });
-
-        // --- Scroll-to-top Button ---
-        window.onscroll = () => {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                scrollToTopBtn.style.display = "flex";
-            } else {
-                scrollToTopBtn.style.display = "none";
-            }
-        };
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-
-
-        // --- Initial Load ---
-        renderRecipeGallery();
-        if (recipes.length === 0) { // Populate with a few dummy recipes if empty for demonstration
-            recipes = [
-                { id: generateId(), title: "Pastel Pink Macarons", shortDescription: "Delicate and delicious French macarons with a hint of rose.", image: "https://images.pexels.com/photos/372882/pexels-photo-372882.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1", ingredients: ["100g almond flour", "100g powdered sugar", "70g egg whites", "70g granulated sugar", "Rose extract", "Pink food coloring"], instructions: "1. Sift almond flour and powdered sugar. 2. Make Italian meringue with egg whites and granulated sugar. 3. Fold in dry ingredients (macaronage). 4. Pipe and bake.", tags: ["dessert", "baking", "french"], timestamp: Date.now() - 100000, likes: 15 },
-                { id: generateId(), title: "Lavender Infused Cupcakes", shortDescription: "Soft cupcakes infused with calming lavender, topped with a light buttercream.", image: "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1", ingredients: ["1 cup flour", "1/2 cup sugar", "1 tsp baking powder", "1 egg", "1/4 cup milk", "Dried lavender", "Buttercream frosting"], instructions: "1. Preheat oven. Mix dry ingredients. 2. Add wet ingredients. 3. Infuse milk with lavender. 4. Bake and frost.", tags: ["cupcake", "lavender", "sweet"], timestamp: Date.now() - 200000, likes: 22 },
-                { id: generateId(), title: "Mint & Pea Bruschetta", shortDescription: "A refreshing and light appetizer, perfect for spring gatherings.", image: "https://images.pexels.com/photos/5638645/pexels-photo-5638645.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1", ingredients: ["Fresh peas", "Mint leaves", "Ricotta cheese", "Baguette slices", "Olive oil", "Lemon zest"], instructions: "1. Blanch peas. 2. Mash peas with mint and ricotta. 3. Toast baguette slices. 4. Top with pea mixture and lemon zest.", tags: ["appetizer", "vegan", "spring"], timestamp: Date.now() - 50000, likes: 8 }
-            ];
-            saveRecipes();
-            renderRecipeGallery();
-        }
-
-
-    }); // End DOMContentLoaded
-</script>
-
+            renderRecipeGallery(); // Call after defining functions and loading theme
+        }); // End DOMContentLoaded
+    </script>
 </body>
 </html>
